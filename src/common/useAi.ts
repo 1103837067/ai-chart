@@ -4,7 +4,7 @@ import { type message } from "../type";
 
 async function get_chart_data(msg:message[] ,res:Ref<string>) {
   try {
-    const response = await fetch("http://https://genapi.exuils.com" , {
+    const response = await fetch("https://genapi.exuils.com" , {
         
         method: "POST",
         headers: {
