@@ -1,0 +1,32 @@
+{
+  "name": "ai-chat",
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@ant-design/icons": "^5.3.7",
+    "@kangc/v-md-editor": "next",
+    "ant-design-vue": "^4.2.3",
+    "package": "^1.0.1",
+    "prismjs": "^1.29.0",
+    "tailwindcss": "^3.4.4",
+    "uuid": "^10.0.0",
+    "vue": "^3.2.45"
+  },
+  "devDependencies": {
+    "@arco-design/web-vue": "^2.55.3",
+    "@vicons/ionicons5": "^0.12.0",
+    "@vitejs/plugin-vue": "^4.0.0",
+    "autoprefixer": "^10.4.19",
+    "naive-ui": "^2.38.2",
+    "postcss": "^8.4.39",
+    "prettier": "^3.3.2",
+    "prettier-plugin-tailwindcss": "^0.6.5",
+    "tailwindcss": "^3.4.4",
+    "vite": "^4.1.0"
+  }
+}
