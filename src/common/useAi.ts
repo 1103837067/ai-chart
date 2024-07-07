@@ -1,24 +1,27 @@
 import { Ref } from "vue";
 import { type message } from "../type";
+import { type MessageApi } from 'naive-ui'
+async function get_chart_data(msg:message[] ,res:Ref<string>,nMessage:MessageApi) {
 
-
-async function get_chart_data(msg:message[] ,res:Ref<string>) {
   try {
-    const response = await fetch("/api" , {
-        
+    const response = await fetch("https://genapi.exuils.com" , {
+        mode: 'cors',
         method: "POST",
         headers: {
             "Content-Type": "application/json",
-            
         },
-        body: JSON.stringify({ msg: msg ,pass: "1078955910" }),
+        body: JSON.stringify({ msg: msg ,pass: localStorage.getItem("pass") }),
     });
 
-    console.log({ message: msg ,pass: "chart" });
 
     if (!response.ok) {
+        // get response data
+     
+        nMessage.error(`${await response.text()},或密码错误`);
+        
       throw new Error(`HTTP error! status: ${response.status}`);
     }
+
     const data = await response.body; // 正确地读取响应体作为文本
 
     if (data) {
@@ -27,21 +30,23 @@ async function get_chart_data(msg:message[] ,res:Ref<string>) {
       const decoder = new TextDecoder();
       while (true) {
         const { done, value } = await reader.read();
-        if (done) break;
-        const result = decoder.decode(value);
-        const regex = /data: \{"response":"(.*?)","p":".*/;
+        
+        const result = decoder.decode(value,{stream:true});
+        const regex = /data: \{"response":"(.*?)","p":"/;
 
         const match = result.match(regex);
         if (match) {
           //   赋值
-            res.value += match[1];
+          res.value += match[1];
         }
+        if (done) break;
 
         
       }
     }
   } catch (error) {
-      console.error("get_chart_data Error:", error);
+    
+    console.error("get_chart_data Error:", error);
   }
 }
 

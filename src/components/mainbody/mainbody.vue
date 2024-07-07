@@ -1,11 +1,24 @@
 <template>
+  <settingPart ref="setting"/>
   <div
     class="content flex flex-col grow h-full min-w-96 w-3/4 border m-3 rounded-lg border-slate-100 shadow-lg text-gray-400 p-3 overflow-hidden"
   >
     <n-card
-      content-style=" justify-content: center; align-items: center; display: flex; "
+      content-style=" justify-content: space-between; align-items: center; display: flex; "
     >
-      标题
+      <div>
+
+      </div>
+      <div>
+        标题
+      </div>
+      <div>
+        <n-button text style="font-size: 24px" @click="setshowModal">
+          <n-icon>
+            <SettingsOutline />
+          </n-icon>
+        </n-button>
+      </div>
     </n-card>
     <div class="chatView h-full overflow-hidden" style="">
       <n-scrollbar ref="myScrollbar" id="scrollbar">
@@ -57,18 +70,25 @@
 </template>
 
 <script setup>
-import { Send } from "@vicons/ionicons5";
+import { Send,SettingsOutline } from "@vicons/ionicons5";
 import messageCard from "./messageCard.vue";
 import userCard from "./userCard.vue";
 import { chatsession } from "./userChat.ts";
 import { onMounted, ref } from "vue";
 import { get_chart_data } from "../../common/useAi.ts";
+import settingPart from "../settingPart/index.vue";
+import { useMessage } from 'naive-ui'
+const naiveMessage = useMessage()
+
 const myScrollbar = ref(null);
 const sendtext = ref("");
-
+const showModal = ref(false);
 function scrollToBottom() {
   myScrollbar.value.scrollTo({ behavior: "smooth", top: 999999999999999999 });
 }
+const setting = ref(null);
+
+
 
 const getChatSessionData = () => {
   const dataArray = chatsession.value.map(item => {
@@ -102,7 +122,7 @@ async function send() {
     }
   );
 
-  get_chart_data(getChatSessionData().slice(0,-1),local_res);
+  get_chart_data(getChatSessionData().slice(0,-1),local_res,naiveMessage);
   sendtext.value = "";
   
   // 异步延时1s
@@ -110,6 +130,10 @@ async function send() {
   setTimeout(() => {
     scrollToBottom();
   }, 0.1);
+}
+
+const setshowModal = ()=>{
+  setting.value.openSetting()
 }
 
 const handleKeyDown = (event) => {
