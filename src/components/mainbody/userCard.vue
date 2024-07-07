@@ -6,7 +6,7 @@
         </div>
 
         <n-card class="chartCol-content mx-3 w-auto  shadow-md rounded-xl bg-green-500" content-style="padding:0">
-            <v-md-preview :text="message"/>
+          <MdPreview :modelValue="message" style="background-color: rgb(34 197 94 / var(--tw-bg-opacity)); border-radius: 10px;"/>
         </n-card>
 
         <div>
@@ -23,7 +23,8 @@
 </template>
 
 <script setup lang="ts">
-
+import { MdPreview } from "md-editor-v3";
+import "md-editor-v3/lib/style.css";
 import { HappySharp } from '@vicons/ionicons5'
 defineProps(['message'])
 

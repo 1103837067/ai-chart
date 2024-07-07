@@ -9,8 +9,8 @@
     </div>
     
 
-    <n-card class="chartCol-content mx-3 w-auto shadow-md rounded-xl" content-style="padding:0">
-      <v-md-preview :text="message"/>
+    <n-card class="chartCol-content mx-3 w-auto  shadow-md rounded-xl" content-style="padding:0">
+      <MdPreview :modelValue="message" style="border-radius: 10px;"/>
     </n-card>
 
     <div style="min-width: 40px; box-sizing: border-box;">
@@ -21,8 +21,10 @@
 </template>
 
 <script setup lang="ts">
+import { MdPreview } from "md-editor-v3";
+import "md-editor-v3/lib/style.css";
 import { LogoOctocat } from '@vicons/ionicons5'
-defineProps(['message'])
+ defineProps(['message'])
 
 </script>
 
